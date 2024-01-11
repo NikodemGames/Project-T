@@ -1,33 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace SVS
 {
-    [SerializeField]
-    private CharacterController controller;
-    [SerializeField]
-    private Transform cam;
-    public float speed = 6f;
-    public float turnSmoothTime = 0.1f;
-    float turnSmoothVelocity;
-
-    // Update is called once per frame
-    void Update()
+    public class PlayerController : MonoBehaviour, IInput
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        public Action<Vector2> OnMovementInput { get; set; }
+        public Action<Vector3> OnMovementDirectionInput { get; set; }
 
-        if(direction.magnitude >= .1f)
+        private void Start()
         {
-            
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y,targetAngle,ref turnSmoothVelocity,turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        private void Update()
+        {
+            GetMovementInput();
+            GetMovementDirection();
+        }
 
-            Vector3 moveDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            controller.Move(moveDirection.normalized * speed * Time.deltaTime);
+        private void GetMovementDirection()
+        {
+            var cameraForwardDirection = Camera.main.transform.forward;
+            Debug.DrawRay(Camera.main.transform.position, cameraForwardDirection * 10, Color.red);
+            var directionToMoveIn = Vector3.Scale(cameraForwardDirection, (Vector3.right + Vector3.forward));
+            Debug.DrawRay(Camera.main.transform.position, directionToMoveIn * 10, Color.blue);
+            OnMovementDirectionInput?.Invoke(directionToMoveIn);
+        }
+
+        private void GetMovementInput()
+        {
+            Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            OnMovementInput?.Invoke(input);
         }
     }
+
 }
