@@ -321,8 +321,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: -0.000000042058495, z: 0.000000017421199, w: 0.92387956}
-  m_LocalPosition: {x: 97.44, y: 7.168, z: 71.98}
+  m_LocalRotation: {x: 0.38268343, y: -0.000000027570676, z: 0.0000000114201475, w: 0.92387956}
+  m_LocalPosition: {x: 97.44, y: 7.63, z: 71.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1431,7 +1431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840019775}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4012623, y: -0.000000015760461, z: 0.000000006904295, w: 0.9159632}
+  m_LocalRotation: {x: 0.4012623, y: 0.00000004094675, z: -0.000000017937825, w: 0.91596323}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1823,7 +1823,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076346786}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.36393544, y: -0, z: -0, w: 0.9314242}
+  m_LocalRotation: {x: 0.3639354, y: 2.653315e-15, z: -1.6310939e-15, w: 0.9314242}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2088,6 +2088,8 @@ GameObject:
   - component: {fileID: 1429610418}
   - component: {fileID: 1429610420}
   - component: {fileID: 1429610421}
+  - component: {fileID: 1429610422}
+  - component: {fileID: 1429610423}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2111,15 +2113,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-    'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-    'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-    'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-    'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Sword And Shield
-    Idle'\n\tFrom animation clip 'Sword And Shield Walk'\n\tFrom animation clip 'Sword
-    And Shield Run'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -2133,7 +2127,7 @@ Transform:
   m_GameObject: {fileID: 1429610417}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 97.44, y: 2.668, z: 74.98}
+  m_LocalPosition: {x: 97.44, y: 3.13, z: 74.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2177,7 +2171,34 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1429610422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429610417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502d1f46648a5d142aeb97ed8f3a8b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1429610423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429610417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0f1a9207ba14b408662fb72c7fe512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 8
+  movementSpeed: 7
+  gravity: 20
 --- !u!1001 &1495178572
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2394,6 +2415,39 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465940246521907071, guid: 596407a5256934b42b8150d8b1ae6e1c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465940246521907071, guid: 596407a5256934b42b8150d8b1ae6e1c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465940246521907071, guid: 596407a5256934b42b8150d8b1ae6e1c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 596407a5256934b42b8150d8b1ae6e1c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0481446aaf426a744881d4c775efcb81, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 596407a5256934b42b8150d8b1ae6e1c,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+        'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
+        'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
+        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
+        'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Sword And Shield
+        Idle'\n\tFrom animation clip 'Sword And Shield Walk'\n\tFrom animation clip
+        'Sword And Shield Run'"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2764,7 +2818,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729948181}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: -0.0000000158966, z: 0.000000006584586, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268343, y: -0.0000000014263201, z: 5.908011e-10, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2991,7 +3045,7 @@ Transform:
   m_GameObject: {fileID: 1985684310}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 97.44, y: 7.168, z: 71.98}
+  m_LocalPosition: {x: 97.44, y: 7.63, z: 71.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
