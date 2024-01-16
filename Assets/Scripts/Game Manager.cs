@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null) instance = this;
+        currentGameMode = GameMode.TACTIC;
     }
 
     #endregion
@@ -21,10 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameMode currentGameMode;
     public delegate void OnGameModeChanged(GameMode newGameMode);
     public static event OnGameModeChanged GameModeChanged;
-    private void Start()
-    {
-        currentGameMode = GameMode.TACTIC;
-    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -36,11 +34,7 @@ public class GameManager : MonoBehaviour
     private void SwitchGameMode()
     {
         currentGameMode = (currentGameMode == GameMode.COMBAT) ? GameMode.TACTIC : GameMode.COMBAT;
-        HandleGameModeSwitch();
+        GameModeChanged?.Invoke(currentGameMode);
     }
 
-    private void HandleGameModeSwitch()
-    {
-        Debug.Log("Current game mode is: " +  currentGameMode);
-    }
 }
