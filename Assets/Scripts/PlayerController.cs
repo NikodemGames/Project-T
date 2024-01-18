@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     IInput input;
     PlayerMovement movement;
+    PlayerCombat combat;
 
     private void OnEnable()
     {
@@ -13,11 +14,13 @@ public class PlayerController : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         input.OnMovementDirectionInput += movement.HandleMovementDirection;
         input.OnMovementInput += movement.HandleMovement;
+        input.OnAttackInput += combat.HandleAttack;
     }
 
     private void OnDisable()
     {
         input.OnMovementDirectionInput -= movement.HandleMovementDirection;
         input.OnMovementInput -= movement.HandleMovement;
+        input.OnAttackInput -= combat.HandleAttack;
     }
 }

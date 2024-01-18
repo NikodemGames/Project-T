@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SwitchGameMode()
+    public void SwitchGameMode()
     {
         currentGameMode = (currentGameMode == GameMode.COMBAT) ? GameMode.TACTIC : GameMode.COMBAT;
         GameModeChanged?.Invoke(currentGameMode);

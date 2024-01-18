@@ -28,11 +28,6 @@ public class PlayerMovement : MonoBehaviour
         }
         _movementVector.y -= gravity;
         controller.Move(_movementVector*Time.deltaTime);
-        if(Input.GetMouseButtonDown(0))
-        {
-            animator.SetBool("IsAttacking", true);
-        }
-
     }
 
     public void HandleMovementDirection(Vector3 direction)
@@ -92,4 +87,6 @@ public class PlayerMovement : MonoBehaviour
         }
         return currentAnimationSpeed;
     }
+
+
 }

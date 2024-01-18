@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour, IInput
 {
     public Action<Vector2> OnMovementInput { get; set; }
     public Action<Vector3> OnMovementDirectionInput { get; set; }
+    public Action<bool> OnAttackInput { get; set; }
 
     private void Start()
     {
@@ -17,6 +18,7 @@ public class PlayerInput : MonoBehaviour, IInput
     {
         GetMovementInput();
         GetMovementDirection();
+        GetAttackInput();
     }
 
     private void GetMovementDirection()
@@ -32,6 +34,12 @@ public class PlayerInput : MonoBehaviour, IInput
     {
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         OnMovementInput?.Invoke(input);
+    }
+
+    void GetAttackInput()
+    {
+        var attackInput = Input.GetMouseButtonDown(0);
+        OnAttackInput?.Invoke(attackInput);
     }
 }
 
