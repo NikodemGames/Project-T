@@ -25,6 +25,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        switch (currentGameMode)
+        {
+            case GameMode.COMBAT:
+                PlayerController.instance.gameObject.SetActive(true); break;
+            case GameMode.TACTIC:
+                PlayerController.instance.gameObject.SetActive(false); break;
+        }
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             SwitchGameMode();
@@ -35,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         currentGameMode = (currentGameMode == GameMode.COMBAT) ? GameMode.TACTIC : GameMode.COMBAT;
         GameModeChanged?.Invoke(currentGameMode);
+        
     }
 
 }

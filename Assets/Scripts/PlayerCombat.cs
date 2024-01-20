@@ -6,23 +6,30 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     public Stats stats;
+    Animator animator;
     float attackCooldown;
     [SerializeField]
     private Transform _SpawnPoint;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         attackCooldown = stats.AttackSpeed;
         
     }
     public void HandleAttack(bool isAttacking)
     {
-        attackCooldown = stats.AttackSpeed;
         if (isAttacking&&attackCooldown >=stats.AttackSpeed)
         {
-            Debug.Log("Player attack");
-            attackCooldown = 0;
+            StartCoroutine(DoDamage(stats.Damage));
         }
+    }
+    IEnumerator DoDamage(int damage)
+    {
+        animator.SetBool("IsAttacking", true);
+        yield return new WaitForSeconds(1.67f);
+        animator.SetBool("IsAttacking", false);
+        attackCooldown = 0;
     }
 
     private void Update()
