@@ -26,8 +26,12 @@ public class PlayerMovement : MonoBehaviour
                 _movementVector *= animationSpeedMultiplier;
             }
         }
-        _movementVector.y -= gravity;
-        controller.Move(_movementVector*Time.deltaTime);
+        if(!animator.GetBool("IsAttacking"))
+        {
+            _movementVector.y -= gravity;
+            controller.Move(_movementVector * Time.deltaTime);
+        }
+
     }
 
     public void HandleMovementDirection(Vector3 direction)

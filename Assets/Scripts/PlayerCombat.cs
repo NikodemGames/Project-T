@@ -10,6 +10,7 @@ public class PlayerCombat : MonoBehaviour
     float attackCooldown;
     [SerializeField]
     private Transform _SpawnPoint;
+    [SerializeField] Transform _AttackPoint;
 
     private void Start()
     {
@@ -28,8 +29,31 @@ public class PlayerCombat : MonoBehaviour
     {
         animator.SetBool("IsAttacking", true);
         yield return new WaitForSeconds(1.67f);
+        Vector3 boxSize = new Vector3(1.5f,.2f,1);
+        Collider[] enemiesHit = Physics.OverlapBox(_AttackPoint.position, boxSize);
+        foreach (Collider c in enemiesHit)
+        {
+            if(c.GetComponent<EnemyAI>() != null)
+            {
+                Debug.Log(c.name + " Got hits for: " + stats.Damage);
+                var enemy = c.GetComponent<EnemyAI>();
+                enemy.TakeDamage(stats.Damage);
+            }
+            
+        }
         animator.SetBool("IsAttacking", false);
         attackCooldown = 0;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (_AttackPoint == null)
+            return;
+
+        Gizmos.color = Color.red;
+
+        Vector3 boxSize = new Vector3(1.2f, 0.2f, 1);
+        Gizmos.DrawWireCube(_AttackPoint.position, boxSize);
     }
 
     private void Update()
