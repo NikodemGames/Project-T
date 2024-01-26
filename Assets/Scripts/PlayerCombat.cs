@@ -28,19 +28,21 @@ public class PlayerCombat : MonoBehaviour
     IEnumerator DoDamage(int damage)
     {
         animator.SetBool("IsAttacking", true);
-        yield return new WaitForSeconds(1.67f);
-        Vector3 boxSize = new Vector3(1.5f,.2f,1);
+        yield return new WaitForSeconds(.8f);
+        Vector3 boxSize = new Vector3(1.5f, .2f, 1);
         Collider[] enemiesHit = Physics.OverlapBox(_AttackPoint.position, boxSize);
         foreach (Collider c in enemiesHit)
         {
-            if(c.GetComponent<EnemyAI>() != null)
+            if (c.GetComponent<EnemyAI>() != null)
             {
-                Debug.Log(c.name + " Got hits for: " + stats.Damage);
+                Debug.Log(c.name + " Got hits for: " + damage);
                 var enemy = c.GetComponent<EnemyAI>();
-                enemy.TakeDamage(stats.Damage);
+                enemy.TakeDamage(damage);
             }
-            
+
         }
+        yield return new WaitForSeconds(.87f);
+       
         animator.SetBool("IsAttacking", false);
         attackCooldown = 0;
     }

@@ -58,6 +58,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 _movementVector = transform.forward * movementSpeed;
             }
+            else if (input.y < 0)
+            {
+                _movementVector = -transform.forward * movementSpeed;
+            }
             else
             {
                 _movementVector = Vector3.zero;
