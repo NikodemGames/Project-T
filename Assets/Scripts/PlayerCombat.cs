@@ -7,7 +7,6 @@ public class PlayerCombat : MonoBehaviour
 {
     public Stats stats;
     Animator animator;
-    float attackCooldown;
     [SerializeField]
     private Transform _SpawnPoint;
     [SerializeField] Transform _AttackPoint;
@@ -15,15 +14,15 @@ public class PlayerCombat : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        attackCooldown = stats.AttackSpeed;
         
     }
     public void HandleAttack(bool isAttacking)
     {
-        if (isAttacking&&attackCooldown >=stats.AttackSpeed)
+        if (isAttacking&&!animator.GetBool("IsAttacking"))
         {
             StartCoroutine(DoDamage(stats.Damage));
         }
+        else return;
     }
     IEnumerator DoDamage(int damage)
     {
@@ -44,7 +43,6 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(.87f);
        
         animator.SetBool("IsAttacking", false);
-        attackCooldown = 0;
     }
 
     void OnDrawGizmos()
@@ -58,14 +56,7 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.DrawWireCube(_AttackPoint.position, boxSize);
     }
 
-    private void Update()
-    {
-        if(attackCooldown < stats.AttackSpeed)
-        {
-            attackCooldown += Time.deltaTime;
-        }
 
-    }
     public void TakeDamage(int damage)
     {
         stats.CurrentHealth -= damage;

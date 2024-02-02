@@ -5,13 +5,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     CharacterController controller;
+    PlayerCombat pc;
     Animator animator;
-    public float rotationSpeed, movementSpeed, gravity = 20;
+    public float rotationSpeed, gravity = 20;
     Vector3 _movementVector = Vector3.zero;
     private float _desiredRotationAngle=0;
 
     private void Start()
     {
+        pc = GetComponent<PlayerCombat>();
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();    
     }
@@ -56,11 +58,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (input.y > 0)
             {
-                _movementVector = transform.forward * movementSpeed;
+                _movementVector = transform.forward * pc.stats.MoveSpeed;
             }
             else if (input.y < 0)
             {
-                _movementVector = -transform.forward * movementSpeed;
+                _movementVector = -transform.forward * pc.stats.MoveSpeed;
             }
             else
             {
@@ -69,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
     private float SetCorrectAnimation()
     {
         float currentAnimationSpeed = animator.GetFloat("move");

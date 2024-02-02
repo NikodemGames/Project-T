@@ -12,6 +12,15 @@ public class Stats
 	private int damage;
 	[SerializeField]
 	private float attackSpeed;
+	[SerializeField]
+	private float moveSpeed;
+
+	public float MoveSpeed
+	{
+		get { return moveSpeed; }
+		set { moveSpeed = value; }
+	}
+
 
 	public float AttackSpeed
 	{

@@ -8,6 +8,10 @@ public class EnemyAI : MonoBehaviour
     Stats stats;
     Transform target;
 
+    private void Start()
+    {
+        target = Fortress.instance.transform;
+    }
     public void TakeDamage(int damage)
     {
         stats.CurrentHealth -= damage;
@@ -16,5 +20,11 @@ public class EnemyAI : MonoBehaviour
     public virtual void Die()
     {
         Destroy(gameObject);
+    }
+    private void Update()
+    {
+        if (target == null) return;
+        transform.position = Vector3.MoveTowards(transform.position, target.position, stats.MoveSpeed * Time.deltaTime);
+
     }
 }
